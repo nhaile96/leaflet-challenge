@@ -35,6 +35,23 @@ function createFeatures(earthquakeData) {
 
 function getFillColor(depth) {
     if (depth >= 90) {
-        return 
+        return "#d73027"
     }
-}
+    else if (depth >= 70) {
+        return "#fc8d59"
+    }
+    else if (depth > + 50) {
+        return "#fee08b"
+    }
+    else if (depth >= 30) {
+        return "#d9ef8b"
+    }
+    else if (depth >= 10) {
+        return "#91cf60"
+    }
+    else {
+        return "#1a9850"
+    }
+};
+
+function createMap(earthquakes) {}
