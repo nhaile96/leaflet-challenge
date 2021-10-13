@@ -60,7 +60,7 @@ function createMap(earthquakes) {
       });
 
     var baseMaps={
-        "Street Map":street,
+        'Street Map':street,
     };
 
     var overlayMaps = {
