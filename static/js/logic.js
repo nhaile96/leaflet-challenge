@@ -81,14 +81,13 @@ function createMap(earthquakes) {
     legend.onAdd = function () {
         var div = L.DomUtil.create('div', 'info legend');
         depth= [-10, 10, 30, 50, 70, 90];
+        labels=[];
 
         div.innerHTML += "<h3 style = 'text-align: center'>Depth</h3>"
-        for (var i = 0;i<depth.length; i++){
-            div.innerHTML +=
-            '<i style="background:' + getFillColor(depth[i] + 1) + '"></i> ' +
-            depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+        for (var i = 0; i < depth.length; i++) {
+            labels.push('<li style="background-color:' + getFillColor(depth[i] + 1) + '"> <span>' + depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '' : '+') + '</span></li>');
         }
-
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
         return div;
     };
     legend.addTo(myMap);
