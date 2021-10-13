@@ -54,4 +54,42 @@ function getFillColor(depth) {
     }
 };
 
-function createMap(earthquakes) {}
+function createMap(earthquakes) {
+    var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      });
+
+    var baseMaps={
+        "Street Map":street,
+    };
+
+    var overlayMaps = {
+        Earthquakes: earthquakes
+    };
+
+    var myMap= L.map("map", {
+        center: [15.5994, -28.6731],
+        zoom : 3
+    });
+
+    L.control.layers(baseMaps,overlayMaps, {
+        collapsed: false
+    }).addTo(myMap);
+
+
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function () {
+        var div = L.DomUtil.create('div', 'info legend');
+        depth= [-10, 10, 30, 50, 70, 90];
+
+        div.innerHTML += "<h3 style = 'text-align: center'>Depth</h3>"
+        for (var i = 0;i<depth.length; i++){
+            div.innerHTML +=
+            '<i style="background:' + getFillColor(depth[i] + 1) + '"></i> ' +
+            depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+    legend.addTo(myMap);
+}
